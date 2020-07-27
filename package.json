@@ -1,0 +1,19 @@
+{
+	"name": "stats_type_srcipt",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start:build": "tsc -w",
+		"start:run": "nodemon build/index.js",
+		"start": "concurrently \"npm run-script start:run\" \"npm run-script start:build\""
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@types/node": "^14.0.26",
+		"concurrently": "^5.2.0",
+		"nodemon": "^2.0.4"
+	}
+}
