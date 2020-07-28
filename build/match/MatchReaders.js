@@ -2,11 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MatchReaders = void 0;
 var utils_1 = require("../tools/utils");
+var CsvFileReader_1 = require("../tools/CsvFileReader");
 var MatchReaders = /** @class */ (function () {
     function MatchReaders(reader) {
         this.reader = reader;
         this.match = [];
     }
+    MatchReaders.read = function (fileName) {
+        var csvFileReader = new CsvFileReader_1.CsvFileReader(fileName);
+        return new MatchReaders(csvFileReader);
+    };
     MatchReaders.prototype.load = function () {
         this.reader.read();
         this.match = this.reader.data.map(function (row) {
