@@ -1,8 +1,15 @@
-import { dataStringToDate } from './utils';
+import { dataStringToDate } from '../tools/utils';
 import { MatchResult } from './MatchResult';
-import { MatchReader } from './inheritance/MatchReader';
 
-type MatchData = [Date, string, string, number, number, MatchResult, string];
+export type MatchData = [
+	Date,
+	string,
+	string,
+	number,
+	number,
+	MatchResult,
+	string
+];
 
 interface DataReader {
 	data: string[][];

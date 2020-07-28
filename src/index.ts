@@ -1,18 +1,24 @@
-import { MatchReaders } from './MatchReaders';
-import { MatchResult } from './MatchResult';
-import { CsvFileReader } from './CsvFileReader';
+import { MatchReaders } from './match/MatchReaders';
+import { CsvFileReader } from './tools/CsvFileReader';
+import { AnalyseAndReport } from './tools/AnalyseAndReport';
+import { WinAnalysis } from './analyzers/WinAnalysis';
+import { ConsoleReport } from './report/ConsoleReport';
+import { HtmlReport } from './report/HtmlReport';
 
 let csvFileReader = new CsvFileReader('football.csv');
 let matchReaders = new MatchReaders(csvFileReader);
 matchReaders.load();
 
-let manUnitesWin = 0;
+//console log result of the team Southampton
+let analyseAndReport = new AnalyseAndReport(
+	new WinAnalysis('Southampton'),
+	new ConsoleReport()
+);
+analyseAndReport.buildAndPrintReport(matchReaders.match);
 
-for (let match of matchReaders.match) {
-	if (match[1] === 'Man United' && match[5] === MatchResult.HomeWin) {
-		manUnitesWin++;
-	} else if (match[2] === 'Man United' && match[5] === MatchResult.AwayWin) {
-		manUnitesWin++;
-	}
-}
-console.log(matchReaders.match);
+//build html report of the team Man United
+let analyseAndReport2 = new AnalyseAndReport(
+	new WinAnalysis('Man United'),
+	new HtmlReport()
+);
+analyseAndReport2.buildAndPrintReport(matchReaders.match);

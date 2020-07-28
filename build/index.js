@@ -1,19 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var MatchReaders_1 = require("./MatchReaders");
-var MatchResult_1 = require("./MatchResult");
-var CsvFileReader_1 = require("./CsvFileReader");
+var MatchReaders_1 = require("./match/MatchReaders");
+var CsvFileReader_1 = require("./tools/CsvFileReader");
+var AnalyseAndReport_1 = require("./tools/AnalyseAndReport");
+var WinAnalysis_1 = require("./analyzers/WinAnalysis");
+var ConsoleReport_1 = require("./report/ConsoleReport");
+var HtmlReport_1 = require("./report/HtmlReport");
 var csvFileReader = new CsvFileReader_1.CsvFileReader('football.csv');
 var matchReaders = new MatchReaders_1.MatchReaders(csvFileReader);
 matchReaders.load();
-var manUnitesWin = 0;
-for (var _i = 0, _a = matchReaders.match; _i < _a.length; _i++) {
-    var match = _a[_i];
-    if (match[1] === 'Man United' && match[5] === MatchResult_1.MatchResult.HomeWin) {
-        manUnitesWin++;
-    }
-    else if (match[2] === 'Man United' && match[5] === MatchResult_1.MatchResult.AwayWin) {
-        manUnitesWin++;
-    }
-}
-console.log(matchReaders.match);
+var analyseAndReport = new AnalyseAndReport_1.AnalyseAndReport(new WinAnalysis_1.WinAnalysis('Southampton'), new ConsoleReport_1.ConsoleReport());
+analyseAndReport.buildAndPrintReport(matchReaders.match);
+var analyseAndReport2 = new AnalyseAndReport_1.AnalyseAndReport(new WinAnalysis_1.WinAnalysis('Southampton'), new HtmlReport_1.HtmlReport());
+analyseAndReport2.buildAndPrintReport(matchReaders.match);

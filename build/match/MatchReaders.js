@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MatchReaders = void 0;
-var utils_1 = require("./utils");
+var utils_1 = require("../tools/utils");
 var MatchReaders = /** @class */ (function () {
     function MatchReaders(reader) {
         this.reader = reader;
